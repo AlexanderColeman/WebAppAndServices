@@ -1,4 +1,4 @@
-﻿namespace AdminService.Model.DTO
+﻿namespace ModelSharingService.DTO
 {
     public class UserDTO
     {

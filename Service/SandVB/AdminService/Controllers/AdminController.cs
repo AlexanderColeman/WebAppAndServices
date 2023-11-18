@@ -1,8 +1,7 @@
 ﻿using AdminService.Manager;
 using AdminService.Model;
-using AdminService.Model.DTO;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ModelSharingService.DTO;
 
 namespace AdminService.Controllers
 {
@@ -34,7 +33,6 @@ namespace AdminService.Controllers
             {
                 Name = user.Name,
             };
-
 
             return newUserDTO;
         }

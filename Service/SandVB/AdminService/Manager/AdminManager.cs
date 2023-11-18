@@ -1,7 +1,7 @@
 ﻿using AdminService.Data;
 using AdminService.Model;
-using AdminService.Model.DTO;
 using Microsoft.EntityFrameworkCore;
+using ModelSharingService.DTO;
 
 namespace AdminService.Manager
 {
