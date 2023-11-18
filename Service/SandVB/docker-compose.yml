@@ -21,6 +21,19 @@ services:
     networks: 
       - dev
 
+  model-sharing-service:
+    image: docker.io/library/modelsharingservice
+    depends_on:
+      - "app_db"
+    container_name: model-sharing-service
+    ports:
+      - "8090:80"  # Use a different port if needed
+    build:
+      context: C:\Users\acole\Desktop\NewAPIServices\Service\SandVB
+      dockerfile: ModelSharingService/Dockerfile.modelsharingservice
+    networks: 
+      - dev
+
   app_db:
     image: postgres:latest
     container_name: app_db
