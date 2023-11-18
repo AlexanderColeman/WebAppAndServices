@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text;
 
 namespace FrontEndService.Manager
 {
@@ -30,7 +29,7 @@ namespace FrontEndService.Manager
         {
             try
             {
-                var apiUrl = "http://admin-service:8089/Admin/ReceiveUserData"; // Corrected endpoint
+                var apiUrl = "http://admin-service/Admin/ReceiveUserData"; // Corrected endpoint
 
                 var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(userData), Encoding.UTF8, "application/json");
 

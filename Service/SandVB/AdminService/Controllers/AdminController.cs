@@ -1,5 +1,6 @@
 ﻿using AdminService.Manager;
 using AdminService.Model;
+using AdminService.Model.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,22 +25,18 @@ namespace AdminService.Controllers
         }
 
         [HttpPost]
-        [Route("ReceiveUserData")]
-        public async Task<IActionResult> ReceiveUserData([FromBody] User userData)
+        [Route("User")]
+        public async Task<UserDTO> createUser(UserDTO userDTO)
         {
-            try
-            {
-                // Your logic to process the received user data
-                // For example, you can save it to a database or perform other operations
-                var result = userData;
+            var user = await _adminManager.createUser(userDTO);
 
-                return Ok(result); // Customize the response based on your needs
-            }
-            catch (Exception ex)
+            var newUserDTO = new UserDTO()
             {
-                // Handle exceptions here
-                return BadRequest($"Error: {ex.Message}");
-            }
+                Name = user.Name,
+            };
+
+
+            return newUserDTO;
         }
 
     }
