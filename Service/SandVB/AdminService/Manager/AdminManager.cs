@@ -12,10 +12,16 @@ namespace AdminService.Manager
         {
             _adminDbContext = adminDbContext;
         }
-        public async Task<IEnumerable<User>> getUsers()
+        public async Task<IEnumerable<UserDTO>> getUsers()
         {
             var users = await _adminDbContext.Users.ToListAsync();
-            return users;
+            List<UserDTO> userDTOs = new List<UserDTO>();
+            foreach (var user in users)
+            {
+                UserDTO dto = new UserDTO() { Name = user.Name, Id = user.Id };
+                userDTOs.Add(dto);
+            }
+            return userDTOs;
         }
 
         public async Task<User> createUser(UserDTO userDTO)

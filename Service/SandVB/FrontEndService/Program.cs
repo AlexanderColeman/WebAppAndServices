@@ -1,4 +1,6 @@
 using FrontEndService.Manager;
+using FrontEndService.Manager.Interface;
+using FrontEndService.Model.EndpointMap;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,12 +10,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<AdminManager>();
-builder.Services.AddScoped<HttpClient>();
-builder.Services.AddHttpClient<AdminManager>(client =>
-{
-    client.BaseAddress = new Uri("http://admin-service:8089"); // Replace with the correct URL
-});
+//builder.Services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddScoped<IAdminManager, AdminManager>();
+builder.Services.AddScoped<IHttpManager, HttpManager>();
+
+builder.Services.AddScoped<AdminMap>();
 
 
 var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
