@@ -16,8 +16,8 @@ namespace AdminService.Controllers
         }
 
         [HttpGet]
-        [Route("User")]
-        public async Task<IEnumerable<User>> getUsers()
+        [Route("Index")]
+        public async Task<IEnumerable<UserDTO>> getUsers()
         {
             var users = await _adminManager.getUsers();
             return users;

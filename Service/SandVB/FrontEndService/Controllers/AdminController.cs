@@ -1,26 +1,37 @@
 ﻿using FrontEndService.Manager;
-using FrontEndService.Model;
+using FrontEndService.Manager.Interface;
 using Microsoft.AspNetCore.Mvc;
+using ModelSharingService.DTO;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FrontEndService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AdminController : Controller
+    public class AdminController : ControllerBase
     {
 
-        private readonly AdminManager _adminManager;
-        public AdminController(AdminManager adminManger)
+        private readonly IAdminManager _adminManager;
+        public AdminController(IAdminManager adminManager)
         {
-            _adminManager = adminManger;
+            _adminManager = adminManager;
         }
 
         [HttpGet]
         [Route("Index")]
-        public async Task<IEnumerable<User>> getUsers()
+        public async Task<IEnumerable<UserDTO>> getUsers()
         {
             var users = await _adminManager.getUsers();
             return users;
+        }
+
+        [HttpPost]
+        [Route("User")]
+        public async Task<UserDTO> SaveUpdateUser(UserDTO userDTO)
+        {
+            var user = await _adminManager.SaveUpdateUser(userDTO);
+            return user;
         }
     }
 }

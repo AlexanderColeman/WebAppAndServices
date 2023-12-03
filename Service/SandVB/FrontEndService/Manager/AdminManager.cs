@@ -1,52 +1,37 @@
-﻿using FrontEndService.Model;
+﻿using FrontEndService.Manager.Interface;
+using FrontEndService.Model;
+using FrontEndService.Model.EndpointMap;
 using Microsoft.EntityFrameworkCore;
+using ModelSharingService.DTO;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FrontEndService.Manager
 {
-    public class AdminManager
+    public class AdminManager : IAdminManager
     {
-
-        private readonly HttpClient _httpClient;
-        public AdminManager(HttpClient httpClient)
+        private IHttpManager _httpManager;
+        private AdminMap _adminMap;
+        public AdminManager(IHttpManager httpManager, AdminMap adminMap)
         {
-            _httpClient = httpClient;
+            _httpManager = httpManager;
+            _adminMap = adminMap;
         }
 
-        public async Task<IEnumerable<User>> getUsers()
-        {
-            var apiUrl = "http://admin-service/Admin/User";
-            var response = await _httpClient.GetAsync(apiUrl);
-            response.EnsureSuccessStatusCode();
-            var user = await response.Content.ReadAsStringAsync();
 
-            return new List<User>();
+        public async Task<IEnumerable<UserDTO>> getUsers()
+        {
+            var users = await _httpManager.MakeGetAsync<IEnumerable<UserDTO>>(_adminMap.BaseUrl, _adminMap.Admin.GetUser());
+
+            return  users;
         }
 
-        public async Task<string> PostUserData(User userData)
+        public async Task<UserDTO> SaveUpdateUser(UserDTO userDTO)
         {
-            try
-            {
-                var apiUrl = "http://admin-service/Admin/ReceiveUserData"; // Corrected endpoint
-
-                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(userData), Encoding.UTF8, "application/json");
-
-                var response = await _httpClient.PostAsync(apiUrl, jsonContent);
-
-                response.EnsureSuccessStatusCode();
-
-                var result = await response.Content.ReadAsStringAsync();
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions here
-                Console.WriteLine($"Error: {ex.Message}");
-                return null;
-            }
+            var user = await _httpManager.MakePostAsync<UserDTO>(_adminMap.BaseUrl, _adminMap.Admin.SaveUpdateUser(), userDTO);
+            return user;
         }
 
     }
