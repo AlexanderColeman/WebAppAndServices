@@ -1,23 +1,18 @@
-using FrontEndService.Manager;
-using FrontEndService.Manager.Interface;
-using FrontEndService.Model.EndpointMap;
+using Microsoft.EntityFrameworkCore;
+using SalesService.Data;
+using SalesService.Manager;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var conn = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<SalesDbContext>(options => options.UseNpgsql(conn));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
-
-builder.Services.AddScoped<IAdminManager, AdminManager>();
-builder.Services.AddScoped<ISalesManager, SalesManager>();
-builder.Services.AddScoped<IHttpManager, HttpManager>();
-
-builder.Services.AddScoped<AdminMap>();
-builder.Services.AddScoped<SalesMap>();
+builder.Services.AddScoped<SalesManager>();
 
 
 var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
@@ -43,11 +38,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-app.UseCors();
 
 app.MapControllers();
 
