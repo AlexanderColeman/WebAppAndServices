@@ -20,17 +20,16 @@ namespace FrontEndService.Manager
             _adminMap = adminMap;
         }
 
-
         public async Task<IEnumerable<UserDTO>> getUsers()
         {
-            var users = await _httpManager.MakeGetAsync<IEnumerable<UserDTO>>(_adminMap.BaseUrl, _adminMap.Admin.GetUser());
+            var users = await _httpManager.MakeGetAsync<IEnumerable<UserDTO>>(_adminMap.BaseUrl, _adminMap.GetUser());
 
             return  users;
         }
 
         public async Task<UserDTO> SaveUpdateUser(UserDTO userDTO)
         {
-            var user = await _httpManager.MakePostAsync<UserDTO>(_adminMap.BaseUrl, _adminMap.Admin.SaveUpdateUser(), userDTO);
+            var user = await _httpManager.MakePostAsync<UserDTO>(_adminMap.BaseUrl, _adminMap.SaveUpdateUser(), userDTO);
             return user;
         }
 
