@@ -1,6 +1,8 @@
 using FrontEndService.Manager;
 using FrontEndService.Manager.Interface;
+using FrontEndService.Messaging;
 using FrontEndService.Model.EndpointMap;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,7 @@ builder.Services.AddScoped<IHttpManager, HttpManager>();
 builder.Services.AddScoped<AdminMap>();
 builder.Services.AddScoped<SalesMap>();
 
+builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection("RabbitMq"));
 
 var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
 

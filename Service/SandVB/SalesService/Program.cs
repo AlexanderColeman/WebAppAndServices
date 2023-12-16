@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SalesService.Data;
 using SalesService.Manager;
+using SalesService.Manager.Interface;
+using SalesService.Messaging;
+using SalesService.Messaging.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +17,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<SalesManager>();
+builder.Services.AddScoped<IAdminManager, AdminManager>();
+builder.Services.AddScoped<IMessagePublisher, RabbitMqMessagePublisher>();
+
+// host background serice for message subscriber 
+builder.Services.AddHostedService<RabbitMqMessageSubscriber>();
 
 
 var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+
+builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection("RabbitMq"));
 
 // Add services to the container.
 builder.Services.AddCors(options =>

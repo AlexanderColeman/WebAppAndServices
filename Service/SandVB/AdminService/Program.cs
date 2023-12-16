@@ -1,5 +1,8 @@
+using AdminService.Controllers.Filters;
 using AdminService.Data;
 using AdminService.Manager;
+using AdminService.Messaging;
+using AdminService.Messaging.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +16,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<AdminManager>();
-
+builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection("RabbitMq"));
+builder.Services.AddSingleton<IMessagePublisher, RabbitMqMessagePublisher>();
+builder.Services.AddScoped<IEventDispatcher, EventDispatcher>();
+builder.Services.AddScoped<EventDispatcherFilter>();
 
 var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
 
