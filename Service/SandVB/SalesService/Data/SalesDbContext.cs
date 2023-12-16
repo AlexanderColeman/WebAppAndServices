@@ -7,6 +7,7 @@ namespace SalesService.Data
     public class SalesDbContext : DbContext
     {
         public DbSet<Sale> Sales { get; set; }
+        public DbSet<SalesUser> SalesUsers { get; set; }
         public SalesDbContext(DbContextOptions<SalesDbContext> options) : base(options)
         {
 

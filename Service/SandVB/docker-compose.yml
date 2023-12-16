@@ -50,6 +50,15 @@ services:
     networks: 
         - dev
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+        - '5672:5672'
+        - '15672:15672'
+    networks:
+        - dev
+
   app_db:
     image: postgres:latest
     container_name: app_db
