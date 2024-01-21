@@ -2,7 +2,7 @@
 
 namespace FrontEndService.Manager.Interface
 {
-    public interface ISalesManager
+    public interface ISalesServiceManager
     {
         Task<SaleDTO> SaveUpdateSale(SaleDTO saleDTO);
     }

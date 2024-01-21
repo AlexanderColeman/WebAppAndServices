@@ -2,7 +2,7 @@
 
 namespace FrontEndService.Manager.Interface
 {
-    public interface IAdminManager
+    public interface IAdminServiceManager
     {
         Task<UserDTO> SaveUpdateUser(UserDTO userDTO);
         Task<IEnumerable<UserDTO>> getUsers();

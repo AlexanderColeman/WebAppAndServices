@@ -1,6 +1,5 @@
 ﻿using FrontEndService.Manager.Interface;
-using FrontEndService.Model;
-using FrontEndService.Model.EndpointMap;
+using FrontEndService.ViewModel.EndpointMap;
 using Microsoft.EntityFrameworkCore;
 using ModelSharingService.DTO;
 using System.Collections.Generic;
@@ -10,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace FrontEndService.Manager
 {
-    public class AdminManager : IAdminManager
+    public class AdminServiceManager : IAdminServiceManager
     {
         private IHttpManager _httpManager;
         private AdminMap _adminMap;
-        public AdminManager(IHttpManager httpManager, AdminMap adminMap)
+        public AdminServiceManager(IHttpManager httpManager, AdminMap adminMap)
         {
             _httpManager = httpManager;
             _adminMap = adminMap;

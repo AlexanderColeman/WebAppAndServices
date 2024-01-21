@@ -26,7 +26,7 @@ namespace AdminService.Manager
             List<UserDTO> userDTOs = new List<UserDTO>();
             foreach (var user in users)
             {
-                UserDTO dto = new UserDTO() { Name = user.Name, Id = user.Id };
+                UserDTO dto = new UserDTO() { Name = user.UserName };
                 userDTOs.Add(dto);
             }
             return userDTOs;

@@ -11,9 +11,8 @@ namespace FrontEndService.Controllers
     [Route("[controller]")]
     public class AdminController : ControllerBase
     {
-
-        private readonly IAdminManager _adminManager;
-        public AdminController(IAdminManager adminManager)
+        private readonly IAdminServiceManager _adminManager;
+        public AdminController(IAdminServiceManager adminManager)
         {
             _adminManager = adminManager;
         }

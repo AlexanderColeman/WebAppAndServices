@@ -10,8 +10,8 @@ namespace FrontEndService.Controllers
     public class SalesController : ControllerBase
     {
 
-        private readonly ISalesManager _salesManager;
-        public SalesController(ISalesManager salesManager)
+        private readonly ISalesServiceManager _salesManager;
+        public SalesController(ISalesServiceManager salesManager)
         {
             _salesManager = salesManager;
         }

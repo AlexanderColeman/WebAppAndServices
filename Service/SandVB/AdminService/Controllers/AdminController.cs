@@ -1,5 +1,6 @@
 ﻿using AdminService.Controllers.Filters;
 using AdminService.Manager;
+using AdminService.Manager.Interface;
 using AdminService.Model;
 using Microsoft.AspNetCore.Mvc;
 using ModelSharingService.DTO;
@@ -11,8 +12,8 @@ namespace AdminService.Controllers
     [Route("[controller]")]
     public class AdminController : Controller
     {
-        private readonly AdminManager _adminManager;
-        public AdminController(AdminManager adminManager)
+        private readonly IAdminManager _adminManager;
+        public AdminController(IAdminManager adminManager)
         {
             _adminManager = adminManager;
         }
@@ -24,20 +25,5 @@ namespace AdminService.Controllers
             var users = await _adminManager.getUsers();
             return users;
         }
-
-        [HttpPost]
-        [Route("User")]
-        public async Task<UserDTO> createUser(UserDTO userDTO)
-        {
-            var user = await _adminManager.createUser(userDTO);
-
-            var newUserDTO = new UserDTO()
-            {
-                Name = user.Name,
-            };
-
-            return newUserDTO;
-        }
-
     }
 }

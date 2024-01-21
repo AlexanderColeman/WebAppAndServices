@@ -1,4 +1,4 @@
-﻿namespace FrontEndService.Model.EndpointMap
+﻿namespace FrontEndService.ViewModel.EndpointMap
 {
     public class AdminMap
     {

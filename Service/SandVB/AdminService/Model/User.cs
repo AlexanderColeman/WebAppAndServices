@@ -1,8 +1,9 @@
-﻿namespace AdminService.Model
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace AdminService.Model
 {
-    public class User
+    public class User : IdentityUser
     {
-        public Guid Id { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
     }
 }

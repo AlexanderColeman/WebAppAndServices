@@ -1,14 +1,14 @@
 ﻿using FrontEndService.Manager.Interface;
-using FrontEndService.Model.EndpointMap;
+using FrontEndService.ViewModel.EndpointMap;
 using ModelSharingService.DTO;
 
 namespace FrontEndService.Manager
 {
-    public class SalesManager : ISalesManager
+    public class SalesServiceManager : ISalesServiceManager
     {
         private IHttpManager _httpManager;
         private SalesMap _salesMap;
-        public SalesManager(IHttpManager httpManager, SalesMap salesMap)
+        public SalesServiceManager(IHttpManager httpManager, SalesMap salesMap)
         {
             _httpManager = httpManager;
             _salesMap = salesMap;
