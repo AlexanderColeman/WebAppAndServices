@@ -9,7 +9,7 @@ services:
     ports:
       - "8088:80"
     build:
-      context: C:\Users\acole\Desktop\NewAPIServices\Service\SandVB
+      context: C:\Users\acole\Desktop\NewAPIServices\Service\Marketplace
       dockerfile: FrontEndService/Dockerfile.frontendservice
     networks: 
       - dev

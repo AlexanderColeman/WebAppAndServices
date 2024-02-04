@@ -42,13 +42,6 @@ namespace AdminService.Manager
             await _adminDbContext.AddAsync(newUser);
             await _adminDbContext.SaveChangesAsync();
 
-            UserEvent userEvent = new UserEvent
-            {
-                UserDTO = userDTO,
-                UserEventType = UserEventTypeEnum.Created
-            };
-            _eventDispatcher.AddUserEvent(userEvent);
-
             return newUser;
         }
     }
