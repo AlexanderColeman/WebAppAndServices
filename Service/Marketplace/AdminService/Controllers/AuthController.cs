@@ -5,6 +5,7 @@ using ModelSharingService.DTO;
 
 namespace AdminService.Controllers
 {
+    [ServiceFilter(typeof(EventDispatcherFilter))]
     [ApiController]
     [Route("[controller]")]
     public class AuthController

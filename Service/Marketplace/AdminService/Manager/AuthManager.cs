@@ -10,7 +10,6 @@ namespace AdminService.Manager
 {
     public class AuthManager : IAuthManager
     {
-
         private AdminDbContext _adminDbContext;
         private readonly IEventDispatcher _eventDispatcher;
         public AuthManager(AdminDbContext adminDbContext, IEventDispatcher eventDispatcher)
@@ -20,14 +19,28 @@ namespace AdminService.Manager
         }
         public async Task<UserRegistrationRequestDTO> Register(UserRegistrationRequestDTO userRegistrationRequestDTO)
         {
-            var newUser = new User()
+            var user = _adminDbContext.Users.FirstOrDefault(u => u.Email.ToUpper() == userRegistrationRequestDTO.Email.ToUpper());
+
+            if (user == null)
             {
-                Name = userRegistrationRequestDTO.Name,
-            };
+                var newUser = new User()
+                {
+                    Name = userRegistrationRequestDTO.Name,
+                    Email = userRegistrationRequestDTO.Email,
+                        
+                };
 
-            await _adminDbContext.AddAsync(newUser);
-            await _adminDbContext.SaveChangesAsync();
+                await _adminDbContext.AddAsync(newUser);
+                await _adminDbContext.SaveChangesAsync();
 
+                UserEvent userEvent = new UserEvent
+                {
+                    UserDTO = new UserDTO() { Name = userRegistrationRequestDTO.Name },
+                    UserEventType = UserEventTypeEnum.Created
+                };
+                _eventDispatcher.AddUserEvent(userEvent);
+            }
+          
             return userRegistrationRequestDTO;
         }
     }

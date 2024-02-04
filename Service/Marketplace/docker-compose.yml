@@ -13,7 +13,7 @@ services:
     ports:
       - "8089:80"  # Use a different port if needed
     build:
-      context: C:\Users\acole\Desktop\NewAPIServices\Service\SandVB
+      context: C:\Users\acole\Desktop\NewAPIServices\Service\Marketplace
       dockerfile: AdminService/Dockerfile.adminservice 
     environment:
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=app_db;Port=5432;Database=AdminDb; IntegratedSecurity=true;Pooling=true;
@@ -29,7 +29,7 @@ services:
     ports:
       - "8090:80"  # Use a different port if needed
     build:
-      context: C:\Users\acole\Desktop\NewAPIServices\Service\SandVB
+      context: C:\Users\acole\Desktop\NewAPIServices\Service\Marketplace
       dockerfile: ModelSharingService/Dockerfile.modelsharingservice
     networks: 
       - dev
@@ -42,7 +42,7 @@ services:
     ports:
         - "8091:80"  # Use a different port if needed
     build:
-        context: C:\Users\acole\Desktop\NewAPIServices\Service\SandVB
+        context: C:\Users\acole\Desktop\NewAPIServices\Service\Marketplace
         dockerfile: SalesService/Dockerfile.salesservice
     environment:
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=postgres;Server=app_db;Port=5432;Database=SalesDb; IntegratedSecurity=true;Pooling=true;
