@@ -16,10 +16,19 @@ namespace FrontEndService.Controllers
 
         [HttpPost]
         [Route("Register")]
-        public async Task<UserRegistrationRequestDTO> Register([FromBody] UserRegistrationRequestDTO requestDTO)
+        public async Task<IActionResult> Register([FromBody] UserRegistrationRequestDTO requestDTO)
         {
-            var userRequestDTO = await _authManager.Register(requestDTO);
-            return userRequestDTO;
+            try
+            {
+                var userRequestDTO = await _authManager.Register(requestDTO);
+                return Ok(userRequestDTO);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details
+                Console.WriteLine($"Exception: {ex.Message}");
+                return BadRequest("An error occurred during registration.");
+            }
         }
 
     }
