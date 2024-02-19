@@ -6,8 +6,14 @@ import { Observable, catchError } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  public isAuthenticated: boolean = false;
+
   constructor(private http: HttpClient) { }
 
+  authUser() {
+    this.isAuthenticated = true;
+  }
+  
   registerUser(payload: any): Observable<any> {
     console.log(payload);
     return this.http.post<any>('http://localhost:8088/Auth/Register', payload, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })

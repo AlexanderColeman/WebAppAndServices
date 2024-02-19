@@ -2,7 +2,6 @@
 using ModelSharingService.DTO;
 using SalesService.Data;
 using SalesService.Model;
-using Microsoft.AspNetCore.Mvc;
 using ModelSharingService.IntegrationEvents;
 using SalesService.Manager.Interface;
 
