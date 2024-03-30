@@ -22,6 +22,7 @@ namespace AdminService.Controllers
         [Route("Index")]
         public async Task<IEnumerable<UserDTO>> getUsers()
         {
+
             var users = await _adminManager.getUsers();
             return users;
         }
