@@ -1,6 +1,8 @@
 using FrontEndService.Manager;
 using FrontEndService.Manager.Interface;
 using FrontEndService.Messaging;
+using FrontEndService.Service;
+using FrontEndService.Service.Interface;
 using FrontEndService.ViewModel.EndpointMap;
 using Microsoft.Extensions.Configuration;
 
@@ -22,6 +24,9 @@ builder.Services.AddScoped<IHttpManager, HttpManager>();
 builder.Services.AddScoped<AdminMap>();
 builder.Services.AddScoped<SalesMap>();
 builder.Services.AddScoped<AuthMap>();
+
+
+builder.Services.AddScoped<ICacheService, CacheService>();
 
 builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection("RabbitMq"));
 
