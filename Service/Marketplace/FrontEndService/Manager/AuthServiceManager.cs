@@ -13,9 +13,14 @@ namespace FrontEndService.Manager
             _httpManager = httpManager;
             _authMap = authMap;
         }
-        public async Task<UserRegistrationRequestDTO> Register(UserRegistrationRequestDTO userRegistrationRequestDTO)
+        public async Task<RegistrationRequestResponseDTO> Register(RegistrationRequestResponseDTO userRegistrationRequestDTO)
         {
-            var user = await _httpManager.MakePostAsync<UserRegistrationRequestDTO>(_authMap.BaseUrl, _authMap.Register(), userRegistrationRequestDTO);
+            var user = await _httpManager.MakePostAsync<RegistrationRequestResponseDTO>(_authMap.BaseUrl, _authMap.Register(), userRegistrationRequestDTO);
+            return user;
+        }
+        public async Task<UserLoginRequestResponseDTO> Login(UserLoginRequestResponseDTO requestDTO)
+        {
+            var user = await _httpManager.MakePostAsync<UserLoginRequestResponseDTO>(_authMap.BaseUrl, _authMap.Login(), requestDTO);
             return user;
         }
     }

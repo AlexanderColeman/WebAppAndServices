@@ -14,5 +14,11 @@
             var url = _configuration["Admin:Auth:Register"];
             return url;
         }
+
+        public string Login()
+        {
+            var url = _configuration["Admin:Auth:Login"];
+            return url;
+        }
     }
 }
