@@ -5,18 +5,18 @@
         <div class="card-header">Login</div>
         <div class="card-body">
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="name">Username:</label>
               <input type="text" id="name" class="form-control" formControlName="name" placeholder="name" />
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="username">Email:</label>
               <input type="text" id="email" class="form-control" formControlName="email" placeholder="Enter your email" />
             </div>
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label for="password">Password:</label>
               <input type="password" id="password" class="form-control" formControlName="password" placeholder="Enter your password" />
-            </div> -->
+            </div>
             <button type="submit" class="btn btn-primary mt-3">Login</button>
           </form>
         </div>

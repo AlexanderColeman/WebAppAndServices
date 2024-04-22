@@ -51,8 +51,8 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = true,
         // production would want to make below true
+        ValidateIssuer = false,
         ValidateAudience = false,
         RequireExpirationTime = false,
         ValidateLifetime = false

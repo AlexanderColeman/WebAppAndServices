@@ -1,4 +1,5 @@
 ﻿using FrontEndService.Manager.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelSharingService.DTO;
 
@@ -28,8 +29,10 @@ namespace FrontEndService.Controllers
 
         [HttpPost]
         [Route("Login")]
+        [Authorize]
         public async Task<IActionResult> Login([FromBody] UserLoginRequestResponseDTO requestDTO)
         {
+            var headers = HttpContext.Request.Headers;
             if (ModelState.IsValid)
             {
                 var userRequestDTO = await _authManager.Login(requestDTO);
