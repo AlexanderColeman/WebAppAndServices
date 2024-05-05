@@ -15,11 +15,30 @@ namespace AdminService.Controllers
         {
             _authManager = authManager;
         }
+
         [HttpPost]
         [Route("Register")]
-        public async Task<UserRegistrationRequestDTO> Register([FromBody] UserRegistrationRequestDTO requestDTO)
+        public async Task<RegistrationRequestResponseDTO> Register([FromBody] RegistrationRequestResponseDTO requestDTO)
         {
-            var userRequestDTO = await _authManager.Register(requestDTO);
+            var userRequest = await _authManager.Register(requestDTO);
+            var userRequestDTO = new RegistrationRequestResponseDTO()
+            {
+                Result = userRequest.Result,
+                Token = userRequest.Token
+            };
+            return userRequestDTO;
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public async Task<UserLoginRequestResponseDTO> Login([FromBody] UserLoginRequestResponseDTO requestDTO)
+        {
+            var userRequest = await _authManager.Login(requestDTO);
+            var userRequestDTO = new UserLoginRequestResponseDTO()
+            {
+                Token = userRequest.Token,
+                Result = userRequest.Result
+            };
             return userRequestDTO;
         }
     }

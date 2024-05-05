@@ -1,9 +1,11 @@
-﻿using ModelSharingService.DTO;
+﻿using Microsoft.Win32;
+using ModelSharingService.DTO;
 
 namespace FrontEndService.Manager.Interface
 {
     public interface IAuthServiceManager
     {
-        Task<UserRegistrationRequestDTO> Register(UserRegistrationRequestDTO userRegistrationRequestDTO);
+        Task<RegistrationRequestResponseDTO> Register(RegistrationRequestResponseDTO userRegistrationRequestDTO); 
+        Task<UserLoginRequestResponseDTO> Login(UserLoginRequestResponseDTO requestDTO);
     }
 }
