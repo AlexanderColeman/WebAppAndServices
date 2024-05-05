@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent {
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
@@ -29,14 +29,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  routeToRegisterForm() {
-    this.router.navigate([`/register`]);
-  }
-
   onSubmit() {
+    // this.router.navigate([`/home`]);
     let payload = {...this.form.value}
 
-    this.authService.login(payload).subscribe(res => {
+    this.authService.registerUser(payload).subscribe(res => {
       this.router.navigate([`/home`]);
     });
   }

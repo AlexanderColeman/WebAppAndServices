@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 import { HomeComponent } from './component/home/home.component';
 import { AuthenticationInterceptor } from './services/authentication-interceptor.component';
+import { RegisterComponent } from './component/register/register.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AuthenticationInterceptor } from './services/authentication-interceptor
     UserComponent,
     LoginComponent,
     NavBarComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

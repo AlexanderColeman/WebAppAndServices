@@ -12,12 +12,26 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  authUser() {
-    this.isAuthenticated = true;
+  checkAuth() {
+    return this.isAuthenticated;
   }
   
   registerUser(payload: Register): Observable<JwtAuth> {
     return this.http.post<JwtAuth>('http://localhost:8088/Auth/Register', payload, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+      .pipe(
+        tap(jwt => {
+          localStorage.setItem('jwtToken', jwt.token);
+          this.isAuthenticated = true;
+        }),
+        catchError((error) => {
+          console.error('HTTP error occurred:', error);
+          throw error; // Rethrow the error to propagate it to the component/service that subscribes to this observable
+        })
+      );
+  }
+
+  login(payload: any): Observable<JwtAuth> {
+    return this.http.post<JwtAuth>('http://localhost:8088/Auth/Login', payload, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
       .pipe(
         tap(jwt => {
           localStorage.setItem('jwtToken', jwt.token);
@@ -28,19 +42,4 @@ export class AuthService {
         })
       );
   }
-
-  Login(payload: any): Observable<any> {
-    return this.http.post<any>('http://localhost:8088/Auth/Login', payload, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
-      .pipe(
-        tap(res => {
-          console.log(res);
-        }),
-        catchError((error) => {
-          console.error('HTTP error occurred:', error);
-          throw error; // Rethrow the error to propagate it to the component/service that subscribes to this observable
-        })
-      );
-  }
-
-  
 }
